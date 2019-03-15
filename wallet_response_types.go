@@ -50,7 +50,7 @@ type SubAddressAccountInfo struct {
 	Balance         uint64 `json:"balance"`
 	UnlockedBalance uint64 `json:"unlocked_balance"`
 	Label           string `json:"label,omitempty"`
-	Tag             string `json:"label,omitempty"`
+	Tag             string `json:"tag,omitempty"`
 }
 
 // Accounts represents information returned from a getaccounts request
@@ -121,7 +121,7 @@ type SubmittedTransfer struct {
 
 // RelayedTransaction represents a response from a relay_tx request
 type RelayedTransaction struct {
-	TxHash string `json:"tx_hash:`
+	TxHash string `json:"tx_hash"`
 }
 
 // Payment contains information about a payment
