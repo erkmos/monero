@@ -59,12 +59,17 @@ func (c *WalletClient) GetAddressesByAccount(accountIndex uint32) ([]AddressInfo
 }
 
 // GetAddressIndex will get the account index of a given address
-func (c *WalletClient) GetAddressIndex() (uint32, error) {
+func (c *WalletClient) GetAddressIndex(address string) (SubAddressIndex, error) {
 	var rep AddressIndex
-	err := c.Wallet("get_address_index", nil, &rep)
+	req := struct {
+		Address string `json:"address"`
+	}{address}
+	err := c.Wallet("get_address_index", &req, &rep)
+
 	if err != nil {
 		return rep.Index, err
 	}
+
 	return rep.Index, nil
 }
 

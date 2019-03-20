@@ -32,9 +32,15 @@ type Address struct {
 	Addresses []AddressInfo `json:"addresses"`
 }
 
+// SubAddressIndex represents an index for a subaddress
+type SubAddressIndex struct {
+	Major uint32 `json:"major"`
+	Minor uint32 `json:"minor"`
+}
+
 // AddressIndex represents the response data for a getaddressindex request
 type AddressIndex struct {
-	Index uint32 `json:"index"`
+	Index SubAddressIndex `json:"index"`
 }
 
 // CreatedAddress represents the response data for a create_address request
@@ -141,12 +147,12 @@ type Payments struct {
 
 // TransferDetails contains information about an incoming transfer
 type TransferDetails struct {
-	Amount          uint64 `json:"amount"`
-	Spent           bool   `json:"spent"`
-	GlobalIndex     uint64 `json:"global_index"`
-	TxHash          string `json:"tx_hash"`
-	SubAddressIndex uint32 `json:"subaddr_index,omitempty"`
-	KeyImage        string `json:"key_image"`
+	Amount          uint64          `json:"amount"`
+	Spent           bool            `json:"spent"`
+	GlobalIndex     uint64          `json:"global_index"`
+	TxHash          string          `json:"tx_hash"`
+	SubAddressIndex SubAddressIndex `json:"subaddr_index,omitempty"`
+	KeyImage        string          `json:"key_image"`
 }
 
 // IncomingTransfersData represents a response from a incoming_transfers request
@@ -184,21 +190,21 @@ type CheckedProof struct {
 
 // TransferEntry represents a transaction entry from a get_transfers request
 type TransferEntry struct {
-	TransactionID                   string        `json:"txid"`
-	PaymentID                       string        `json:"payment_id"`
-	Height                          uint64        `json:"height"`
-	Timestamp                       uint64        `json:"timestamp"`
-	Amount                          uint64        `json:"amount"`
-	Fee                             uint64        `json:"Fee"`
-	Note                            string        `json:"note"`
-	Destinations                    []Destination `json:"destinations"`
-	Type                            string        `json:"type"`
-	UnlockTime                      uint64        `json:"unlock_time"`
-	SubAddressIndex                 uint32        `json:"subaddr_index"`
-	Address                         string        `json:"address"`
-	DoubleSpendSeen                 bool          `json:"double_spend_seen"`
-	Confirmations                   uint64        `json:"confirmations"`
-	SuggestedConfirmationsThreshold uint64        `json:"suggested_confirmations_threshold"`
+	TransactionID                   string          `json:"txid"`
+	PaymentID                       string          `json:"payment_id"`
+	Height                          uint64          `json:"height"`
+	Timestamp                       uint64          `json:"timestamp"`
+	Amount                          uint64          `json:"amount"`
+	Fee                             uint64          `json:"Fee"`
+	Note                            string          `json:"note"`
+	Destinations                    []Destination   `json:"destinations"`
+	Type                            string          `json:"type"`
+	UnlockTime                      uint64          `json:"unlock_time"`
+	SubAddressIndex                 SubAddressIndex `json:"subaddr_index"`
+	Address                         string          `json:"address"`
+	DoubleSpendSeen                 bool            `json:"double_spend_seen"`
+	Confirmations                   uint64          `json:"confirmations"`
+	SuggestedConfirmationsThreshold uint64          `json:"suggested_confirmations_threshold"`
 }
 
 // Transfers represents transfers data from a get_transfers request
