@@ -29,7 +29,7 @@ func (c *WalletClient) GetBalances() (Balance, error) {
 // GetBalanceForAccount fetches the balance for a given account
 func (c *WalletClient) GetBalanceForAccount(accountIndex uint32) (Balance, error) {
 	var rep Balance
-	request := GetBalance{accountIndex}
+	request := GetBalance{accountIndex, []uint32{}}
 	if err := c.Wallet("getbalance", request, &rep); err != nil {
 		return rep, err
 	}
