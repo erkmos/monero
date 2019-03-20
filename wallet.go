@@ -46,6 +46,18 @@ func (c *WalletClient) GetAddresses(filters *AddressFilters) ([]AddressInfo, err
 	return rep.Addresses, nil
 }
 
+// GetAddressesByAccount will get all addresses for a given account
+func (c *WalletClient) GetAddressesByAccount(accountIndex uint32) ([]AddressInfo, error) {
+	var rep Address
+	request := struct {
+		AccountIndex uint32 `json:"account_index"`
+	}{accountIndex}
+	if err := c.Wallet("getaddress", &request, &rep); err != nil {
+		return rep.Addresses, err
+	}
+	return rep.Addresses, nil
+}
+
 // GetAddressIndex will get the account index of a given address
 func (c *WalletClient) GetAddressIndex() (uint32, error) {
 	var rep AddressIndex
