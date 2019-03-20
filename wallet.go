@@ -18,7 +18,7 @@ func NewWalletClient(endpoint, username, password string) *WalletClient {
 }
 
 // GetBalance will fetch balances for all addresses and subaddress in a wallet
-func (c *WalletClient) GetBalance() (Balance, error) {
+func (c *WalletClient) GetBalances() (Balance, error) {
 	var rep Balance
 	if err := c.Wallet("getbalance", nil, &rep); err != nil {
 		return rep, err
@@ -26,8 +26,19 @@ func (c *WalletClient) GetBalance() (Balance, error) {
 	return rep, nil
 }
 
-// GetAddress will get information about addresses in wallet
-func (c *WalletClient) GetAddress(filters *AddressFilters) ([]AddressInfo, error) {
+// GetBalanceForAccount fetches the balance for a given account
+func (c *WalletClient) GetBalanceForAccount(accountIndex uint32) (Balance, error) {
+	var rep Balance
+	request := GetBalance{accountIndex}
+	if err := c.Wallet("getbalance", request, &rep); err != nil {
+		return rep, err
+	}
+	return rep, nil
+}
+
+// GetAddresses will get information about all addresses in wallet
+// filtered by the given parameters
+func (c *WalletClient) GetAddresses(filters *AddressFilters) ([]AddressInfo, error) {
 	var rep Address
 	if err := c.Wallet("getaddress", filters, &rep); err != nil {
 		return rep.Addresses, err
