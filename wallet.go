@@ -17,7 +17,7 @@ func NewWalletClient(endpoint, username, password string) *WalletClient {
 	return &WalletClient{NewCallClient(endpoint, username, password)}
 }
 
-// GetBalance will fetch balances for all addresses and subaddress in a wallet
+// GetBalances will fetch balances for all addresses and subaddress in a wallet
 func (c *WalletClient) GetBalances() (Balance, error) {
 	var rep Balance
 	if err := c.Wallet("getbalance", nil, &rep); err != nil {
