@@ -635,7 +635,7 @@ func (c *WalletClient) GetPoolTransfers(minHeight uint64, accountIndex uint32) (
 }
 
 // GetIncomingTransfers get incoming transfers that are confirmed or confirming
-func (c *WalletClient) GetIncomingTransfers(accountIndex uint32, minHeight uint64, maxHeight uint64) ([]TransferEntry, error) {
+func (c *WalletClient) GetIncomingTransfers(accountIndex uint32, minHeight uint64) ([]TransferEntry, error) {
 	var rep Transfers
 	req := struct {
 		MinHeight      uint64 `json:"min_height"`
