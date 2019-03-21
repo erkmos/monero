@@ -2,13 +2,13 @@ package monero
 
 // GetBalance describes parameters for a getbalance request
 type GetBalance struct {
-	AccountIndex   uint32   `json:"account_index,omitempty"`
+	AccountIndex   uint32   `json:"account_index"`
 	AddressIndices []uint32 `json:"address_indices,omitempty"`
 }
 
 // AddressFilters describes filter parameters for a getaddress request
 type AddressFilters struct {
-	AccountIndex uint32   `json:"account_index,omitempty"`
+	AccountIndex uint32   `json:"account_index"`
 	AddressIndex []uint32 `json:"address_index,omitempty"`
 }
 
@@ -19,7 +19,7 @@ type GetAddressIndex struct {
 
 // CreateAddress describes the request parameters for a create_address request
 type CreateAddress struct {
-	AccountIndex uint32 `json:"account_index,omitempty"`
+	AccountIndex uint32 `json:"account_index"`
 	Label        string `json:"label,omitempty"`
 }
 
@@ -97,10 +97,10 @@ type SubmitTransfer struct {
 
 // SweepDust represents details about parameters in a sweep_dust request
 type SweepDust struct {
-	GetTxKeys     bool `json:"get_tx_keys,omitempty"`
-	DoNotRelay    bool `json:"do_not_relay,omitempty"`
-	GetTxHex      bool `json:"get_tx_hex,omitempty"`
-	GetTxMetadata bool `json:"get_tx_metadata,omitempty"`
+	GetTxKeys     bool `json:"get_tx_keys"`
+	DoNotRelay    bool `json:"do_not_relay"`
+	GetTxHex      bool `json:"get_tx_hex"`
+	GetTxMetadata bool `json:"get_tx_metadata"`
 }
 
 // SweepAllDust represents details about parameters in a sweep_all request
@@ -143,26 +143,26 @@ type RelayTransaction struct {
 
 // GetPayments represents details about parameters in a get_payments request
 type GetPayments struct {
-	PaymentID string `json:"payment_id,omitempty"`
+	PaymentID string `json:"payment_id"`
 }
 
 // GetBulkPayments represents details about parameters in a get_bulk_payments request
 type GetBulkPayments struct {
 	PaymentIDs     []string `json:"payment_ids,omitempty"`
-	MinBlockHeight uint64   `json:"min_block_height,omitempty"`
+	MinBlockHeight uint64   `json:"min_block_height"`
 }
 
 // IncomingTransfers represents details about parameters in a incoming_transfers request
 type IncomingTransfers struct {
 	TransferType      string   `json:"transfer_type,omitempty"`
-	AccountIndex      uint32   `json:"account_index,omitempty"`
+	AccountIndex      uint32   `json:"account_index"`
 	SubAddressIndices []uint32 `json:"subaddr_indices"`
 }
 
 // MakeIntegratedAddress request parameters
 type MakeIntegratedAddress struct {
-	StandardAddress string `json:"standard_address,omitempty"`
-	PaymentID       string `json:"payment_id,omitempty"`
+	StandardAddress string `json:"standard_address"`
+	PaymentID       string `json:"payment_id"`
 }
 
 // CheckTransactionProof request parameters
@@ -175,15 +175,15 @@ type CheckTransactionProof struct {
 
 // GetTransfersFilter request parameters
 type GetTransfersFilter struct {
-	In                bool     `json:"in,omitempty"`
-	Out               bool     `json:"out,omitempty"`
-	Pending           bool     `json:"pending,omitempty"`
-	Failed            bool     `json:"failed,omitempty"`
-	Pool              bool     `json:"pool,omitempty"`
-	FilterByHeight    bool     `json:"filter_by_height,omitempty"`
-	MinHeight         uint64   `json:"min_height,omitempty"`
-	MaxHeight         uint64   `json:"max_height,omitempty"`
-	AccountIndex      uint32   `json:"account_index,omitempty"`
+	In                *bool    `json:"in,omitempty"`
+	Out               *bool    `json:"out,omitempty"`
+	Pending           *bool    `json:"pending,omitempty"`
+	Failed            *bool    `json:"failed,omitempty"`
+	Pool              *bool    `json:"pool,omitempty"`
+	FilterByHeight    *bool    `json:"filter_by_height,omitempty"`
+	MinHeight         *uint64  `json:"min_height,omitempty"`
+	MaxHeight         *uint64  `json:"max_height,omitempty"`
+	AccountIndex      *uint32  `json:"account_index,omitempty"`
 	SubAddressIndices []uint32 `json:"subaddr_indices,omitempty"`
 }
 

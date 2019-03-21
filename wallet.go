@@ -615,6 +615,58 @@ func (c *WalletClient) GetTransfers(req GetTransfersFilter) (Transfers, error) {
 	return rep, nil
 }
 
+// GetPoolTransfers get transfers in the mempool
+func (c *WalletClient) GetPoolTransfers(minHeight uint64, accountIndex uint32) ([]TransferEntry, error) {
+	var rep Transfers
+	req := struct {
+		MinHeight      uint64 `json:"min_height"`
+		AccountIndex   uint32 `json:"account_index"`
+		Pool           bool   `json:"pool"`
+		FilterByHeight bool   `json:"filter_by_height"`
+	}{minHeight, accountIndex, true, true}
+
+	if err := c.Wallet("get_transfers", req, &rep); err != nil {
+		return rep.Pool, err
+	}
+
+	return rep.Pool, nil
+}
+
+// GetIncomingTransfers get incoming transfers that are confirmed or confirming
+func (c *WalletClient) GetIncomingTransfers(accountIndex uint32, minHeight uint64, maxHeight uint64) ([]TransferEntry, error) {
+	var rep Transfers
+	req := struct {
+		MinHeight      uint64 `json:"min_height"`
+		AccountIndex   uint32 `json:"account_index"`
+		In             bool   `json:"in"`
+		FilterByHeight bool   `json:"filter_by_height"`
+	}{minHeight, accountIndex, true, true}
+
+	if err := c.Wallet("get_transfers", req, &rep); err != nil {
+		return rep.In, err
+	}
+
+	return rep.In, nil
+}
+
+// GetOutgoingTransfers get incoming transfers that are confirmed or confirming
+func (c *WalletClient) GetOutgoingTransfers(accountIndex uint32, minHeight uint64, maxHeight uint64) ([]TransferEntry, error) {
+	var rep Transfers
+	req := struct {
+		MinHeight      uint64 `json:"min_height"`
+		MaxHeight      uint64 `json:"max_height"`
+		AccountIndex   uint32 `json:"account_index"`
+		Out            bool   `json:"out"`
+		FilterByHeight bool   `json:"filter_by_height"`
+	}{minHeight, maxHeight, accountIndex, true, true}
+
+	if err := c.Wallet("get_transfers", req, &rep); err != nil {
+		return rep.Out, err
+	}
+
+	return rep.Out, nil
+}
+
 // GetTransferByTxID will fetch a transaction given by a transaction id
 func (c *WalletClient) GetTransferByTxID(txid string) (Transfer, error) {
 	req := struct {

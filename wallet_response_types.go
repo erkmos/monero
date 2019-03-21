@@ -15,14 +15,14 @@ type SubAddressInfo struct {
 	Address           string `json:"address"`
 	Balance           uint64 `json:"balance"`
 	UnlockedBalance   uint64 `json:"unlocked_balance"`
-	Label             string `json:"label,omitempty"`
+	Label             string `json:"label"`
 	NumUnspentOutputs uint64 `json:"num_unspent_outputs"`
 }
 
 // AddressInfo contains information about a wallet address
 type AddressInfo struct {
 	Address      string `json:"address"`
-	Label        string `json:"label,omitempty"`
+	Label        string `json:"label"`
 	AddressIndex uint32 `json:"address_index"`
 	Used         bool   `json:"used"`
 }
@@ -55,8 +55,8 @@ type SubAddressAccountInfo struct {
 	BaseAddress     string `json:"base_address"`
 	Balance         uint64 `json:"balance"`
 	UnlockedBalance uint64 `json:"unlocked_balance"`
-	Label           string `json:"label,omitempty"`
-	Tag             string `json:"tag,omitempty"`
+	Label           string `json:"label"`
+	Tag             string `json:"tag"`
 }
 
 // Accounts represents information returned from a getaccounts request
@@ -91,14 +91,14 @@ type Height struct {
 
 // Transfer represents details about a particular transfer response
 type Transfer struct {
-	TxHash        string `json:"tx_hash,omitempty"`
-	TxKey         string `json:"tx_key,omitempty"`
-	Amount        uint64 `json:"amount,omitempty"`
-	Fee           uint64 `json:"fee,omitempty"`
-	TxBlob        string `json:"tx_blob,omitempty"`
-	TxMetadata    string `json:"tx_metadata,omitempty"`
-	MultisigTxSet string `json:"multisig_txset,omitempty"`
-	UnsignedTxSet string `json:"unsigned_txset,omitempty"`
+	TxHash        string `json:"tx_hash"`
+	TxKey         string `json:"tx_key"`
+	Amount        uint64 `json:"amount"`
+	Fee           uint64 `json:"fee"`
+	TxBlob        string `json:"tx_blob"`
+	TxMetadata    string `json:"tx_metadata"`
+	MultisigTxSet string `json:"multisig_txset"`
+	UnsignedTxSet string `json:"unsigned_txset"`
 }
 
 // TransferSplit represents a response from a transfer_split request
@@ -108,8 +108,8 @@ type TransferSplit struct {
 	AmountList     []uint64 `json:"amount_list"`
 	FeeList        []uint64 `json:"fee_list"`
 	TxBlobList     []string `json:"tx_blob_list"`
-	TxMetadataList []string `json:"tx_metadata_list,omitempty"`
-	MultisigTxSet  string   `json:"multisig_txset,omitempty"`
+	TxMetadataList []string `json:"tx_metadata_list"`
+	MultisigTxSet  string   `json:"multisig_txset"`
 	UnsignedTxSet  string   `json:"unsigned_txset"`
 }
 
@@ -151,7 +151,7 @@ type TransferDetails struct {
 	Spent           bool            `json:"spent"`
 	GlobalIndex     uint64          `json:"global_index"`
 	TxHash          string          `json:"tx_hash"`
-	SubAddressIndex SubAddressIndex `json:"subaddr_index,omitempty"`
+	SubAddressIndex SubAddressIndex `json:"subaddr_index"`
 	KeyImage        string          `json:"key_image"`
 }
 
@@ -209,11 +209,11 @@ type TransferEntry struct {
 
 // Transfers represents transfers data from a get_transfers request
 type Transfers struct {
-	In      []TransferEntry `json:"in"`
-	Out     []TransferEntry `json:"out"`
-	Pending []TransferEntry `json:"pending"`
-	Failed  []TransferEntry `json:"failed"`
-	Pool    []TransferEntry `json:"pool"`
+	In      []TransferEntry `json:"in,omitempty"`
+	Out     []TransferEntry `json:"out,omitempty"`
+	Pending []TransferEntry `json:"pending,omitempty"`
+	Failed  []TransferEntry `json:"failed,omitempty"`
+	Pool    []TransferEntry `json:"pool,omitempty"`
 }
 
 // CheckedReserveProof represents the result of a reverse proof verification
