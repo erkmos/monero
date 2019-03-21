@@ -187,12 +187,12 @@ func (c *WalletClient) SetAccountTagDescription(tag string, description string) 
 }
 
 // GetHeight will get the currently synced height of the blockchain
-func (c *WalletClient) GetHeight() (Height, error) {
+func (c *WalletClient) GetHeight() (uint64, error) {
 	var rep Height
 	if err := c.Wallet("getheight", nil, &rep); err != nil {
-		return rep, err
+		return rep.Height, err
 	}
-	return rep, nil
+	return rep.Height, nil
 }
 
 // Transfer will transfer funds to a given address
@@ -616,6 +616,8 @@ func (c *WalletClient) GetTransfers(req GetTransfersFilter) (Transfers, error) {
 }
 
 // GetPoolTransfers get transfers in the mempool
+// will filter deposits by minHeight, which returns all transfers _above_
+// minHeight in the given account
 func (c *WalletClient) GetPoolTransfers(minHeight uint64, accountIndex uint32) ([]TransferEntry, error) {
 	var rep Transfers
 	req := struct {

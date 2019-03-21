@@ -86,7 +86,7 @@ type AccountTags struct {
 
 // Height represents the latest (synced) blockchain height
 type Height struct {
-	Height int64 `json:"height"`
+	Height uint64 `json:"height"`
 }
 
 // Transfer represents details about a particular transfer response
