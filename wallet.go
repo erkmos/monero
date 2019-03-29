@@ -634,6 +634,34 @@ func (c *WalletClient) GetPoolTransfers(minHeight uint64, accountIndex uint32) (
 	return rep.Pool, nil
 }
 
+// GetTransfersWithMempool returns all transactions (including mempool) since a given block
+func (c *WalletClient) GetTransfersWithMempool(accountIndex uint32, minHeight uint64) ([]TransferEntry, error) {
+	var response Transfers
+	req := struct {
+		MinHeight      uint64 `json:"min_height"`
+		AccountIndex   uint32 `json:"account_index"`
+		In             bool   `json:"in"`
+		Pool           bool   `json:"pool"`
+		FilterByHeight bool   `json:"filter_by_height"`
+	}{minHeight, accountIndex, true, true, true}
+
+	err := c.Wallet("get_transfers", req, &response)
+
+	if err != nil {
+		return response.In, err
+	}
+
+	// workaround for bug in 0.14.0.2
+	// it will return confirmations == height for mempool transactions
+	for _, item := range response.Pool {
+		if item.Confirmations > 0 {
+			item.Confirmations = 0
+		}
+	}
+
+	return append(response.In, response.Pool...), nil
+}
+
 // GetIncomingTransfers get incoming transfers that are confirmed or confirming
 func (c *WalletClient) GetIncomingTransfers(accountIndex uint32, minHeight uint64) ([]TransferEntry, error) {
 	var rep Transfers
