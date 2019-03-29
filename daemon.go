@@ -152,3 +152,24 @@ func (c *DaemonClient) GetBans() (BanResponse, error) {
 	}
 	return br, nil
 }
+
+// GenerateBlocks generates a given amount of blocks with a given address that
+// will received the generated funds
+func (c *DaemonClient) GenerateBlocks(address string, numBlocks uint64) (newHeight uint64, err error) {
+	var response struct {
+		Height uint64 `json:"height"`
+		Status string `json:"status"`
+	}
+	request := struct {
+		AmountOfBlocks uint64 `json:"amount_of_blocks"`
+		WalletAddress  string `json:"wallet_address"`
+	}{numBlocks, address}
+
+	err = c.Daemon("generateblocks", &request, &response)
+
+	if err != nil {
+		return response.Height, err
+	}
+
+	return response.Height, nil
+}
