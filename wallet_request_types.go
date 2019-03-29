@@ -73,15 +73,15 @@ type TransferInput struct {
 	Destinations      []Destination `json:"destinations"`
 	AccountIndex      uint32        `json:"account_index"`
 	SubAddressIndices []uint32      `json:"subaddr_indices,omitempty"`
-	Priority          uint32        `json:"priority"`
+	Priority          *uint32       `json:"priority"`
 	Mixin             uint64        `json:"mixin"`
 	RingSize          uint64        `json:"ring_size"`
-	UnlockTime        uint64        `json:"unlock_time"`
-	PaymentID         string        `json:"payment_id"`
-	GetTxKey          bool          `json:"get_tx_key"`
-	DoNotRelay        bool          `json:"do_not_relay"`
-	GetTxHex          bool          `json:"get_tx_hex"`
-	TxMetadata        bool          `json:"tx_metadata"`
+	UnlockTime        *uint64       `json:"unlock_time,omitempty"`
+	PaymentID         *string       `json:"payment_id,omitempty"`
+	GetTxKey          *bool         `json:"get_tx_key,omitempty"`
+	DoNotRelay        *bool         `json:"do_not_relay,omitempty"`
+	GetTxHex          *bool         `json:"get_tx_hex,omitempty"`
+	TxMetadata        *bool         `json:"tx_metadata,omitempty"`
 }
 
 // SignTransfer represents details about parameters in a sign_transfer request
