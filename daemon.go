@@ -173,3 +173,16 @@ func (c *DaemonClient) GenerateBlocks(address string, numBlocks uint64) (newHeig
 
 	return response.Height, nil
 }
+
+// GetBlockHashByHeight will return the hash of block at a requested height, if available
+func (c *DaemonClient) GetBlockHashByHeight(height uint64) (blockHash string, err error) {
+	request := []uint64{height}
+
+	err = c.Daemon("on_getblockhash", request, &blockHash)
+
+	if err != nil {
+		return blockHash, err
+	}
+
+	return blockHash, nil
+}
