@@ -74,7 +74,7 @@ type TransferInput struct {
 	AccountIndex      uint32        `json:"account_index"`
 	SubAddressIndices []uint32      `json:"subaddr_indices,omitempty"`
 	Priority          *uint32       `json:"priority"`
-	Mixin             uint64        `json:"mixin"`
+	Mixin             *uint64       `json:"mixin,omitempty"`
 	RingSize          uint64        `json:"ring_size"`
 	UnlockTime        *uint64       `json:"unlock_time,omitempty"`
 	PaymentID         *string       `json:"payment_id,omitempty"`
