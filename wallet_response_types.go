@@ -275,3 +275,8 @@ type SignedMultisigTransaction struct {
 	DataHex  string   `json:"tx_data_hex"`
 	HashList []string `json:"tx_hash_list"`
 }
+
+type GetTransferByTxIDResponse struct {
+	Transfer  TransferEntry   `json:"transfer"`
+	Transfers []TransferEntry `json:"transfers"`
+}
