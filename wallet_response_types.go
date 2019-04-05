@@ -2,15 +2,26 @@ package monero
 
 // Balance represent the response data for a get balance request
 type Balance struct {
-	Balance               uint64           `json:"balance"`
-	UnlockedBalance       uint64           `json:"unlocked_balance"`
-	MultigsigImportNeeded bool             `json:"multisig_import_needed"`
-	SubAddresses          []SubAddressInfo `json:"per_subaddress"`
+	Balance               uint64              `json:"balance"`
+	UnlockedBalance       uint64              `json:"unlocked_balance"`
+	MultigsigImportNeeded bool                `json:"multisig_import_needed"`
+	PerSubaddress         []PerSubAddressInfo `json:"per_subaddress"`
 }
 
 // SubAddressInfo contains information about a set of subaddresses in a get
 // balance request
 type SubAddressInfo struct {
+	AddressIndex      uint32 `json:"address_index"`
+	Address           string `json:"address"`
+	Balance           uint64 `json:"balance"`
+	UnlockedBalance   uint64 `json:"unlocked_balance"`
+	Label             string `json:"label"`
+	NumUnspentOutputs uint64 `json:"num_unspent_outputs"`
+}
+
+// PerSubAddressInfo ...
+type PerSubAddressInfo struct {
+	AccountIndex      uint32 `json:"account_index"`
 	AddressIndex      uint32 `json:"address_index"`
 	Address           string `json:"address"`
 	Balance           uint64 `json:"balance"`
@@ -276,6 +287,7 @@ type SignedMultisigTransaction struct {
 	HashList []string `json:"tx_hash_list"`
 }
 
+/// GetTransferByTxIDResponse ...
 type GetTransferByTxIDResponse struct {
 	Transfer  TransferEntry   `json:"transfer"`
 	Transfers []TransferEntry `json:"transfers"`
