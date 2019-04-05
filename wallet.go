@@ -698,19 +698,20 @@ func (c *WalletClient) GetOutgoingTransfers(accountIndex uint32, minHeight uint6
 }
 
 // GetTransferByTxID will fetch a transaction given by a transaction id
-func (c *WalletClient) GetTransferByTxID(txid string) (Transfer, error) {
+func (c *WalletClient) GetTransferByTxID(txid string) (TransferEntry, error) {
 	req := struct {
 		Txid string `json:"txid"`
 	}{
 		txid,
 	}
 	var rep struct {
-		Trade Transfer `json:"transfer"`
+		Transfer  TransferEntry `json:"transfer"`
+		Transfers TransferEntry `json:"transfers"`
 	}
 	if err := c.Wallet("get_transfer_by_txid", req, &rep); err != nil {
-		return rep.Trade, err
+		return rep.Transfer, err
 	}
-	return rep.Trade, nil
+	return rep.Transfer, nil
 }
 
 // Sign will create a signature for the given data

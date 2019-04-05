@@ -1,18 +1,19 @@
 package monero
 
+// DaemonClient a monero daemon client
 type DaemonClient struct {
 	*CallClient
 }
 
-// Creates new daemon client
+// NewDaemonClient Creates new daemon client
 func NewDaemonClient(endpoint string) *DaemonClient {
 	return &DaemonClient{NewCallClient(endpoint, "", "")}
 }
 
-// Look up how many blocks are in the longest chain known to the node.
-func (c *DaemonClient) GetBlockCount() (BlockCount, error) {
-	var bc BlockCount
-	if err := c.Daemon("getblockcount", nil, &bc); err != nil {
+// GetHeight returns the height of the currently known longest chain
+func (c *DaemonClient) GetHeight() (BlockHeight, error) {
+	var bc BlockHeight
+	if err := c.Daemon("get_height", nil, &bc); err != nil {
 		return bc, err
 	}
 	return bc, nil

@@ -8,11 +8,11 @@ import (
 	"encoding/json"
 )
 
-// BlockCount
-// count - unsigned int; Number of blocks in longest chain seen by the node.
+// BlockHeight ...
+// height - unsigned int; Number of blocks in longest chain seen by the node.
 // status - string; General RPC error code. "OK" means everything looks good.
-type BlockCount struct {
-	Count  int    `json:"count"`
+type BlockHeight struct {
+	Height int    `json:"height"`
 	Status string `json:"status"`
 }
 
